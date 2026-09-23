@@ -1,141 +1,39 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercícios JavaScript</title>
-    <style> 
-        body {
-            background-color: rgb(41, 41, 71);
-            color: white;
-            
-        }
-        button {
-            margin: 5px;
-            padding: 8px 12px;
-            cursor: pointer;
-        }
-        input {
-            padding: 8px;
-            margin-right: 5px;
-        }
-        hr {
-            margin: 30px 0;
-            border: 1px solid #555;
-        }
-        img {
-            display: block;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            object-fit: cover;
-        }
-    </style>
-</head>
-<body>
+function calcular() {
+    const n1 = parseFloat(document.getElementById('nota1').value);
+    const n2 = parseFloat(document.getElementById('nota2').value);
+    const n3 = parseFloat(document.getElementById('nota3').value);
+    const divResultado = document.getElementById('resultado');
 
-    <h2>5. Contador de cliques</h2>
-    <h1 id="contador">0</h1>
-    <button onclick="adicionarContador()">Adicionar</button>
+    if (isNaN(n1) || isNaN(n2) || isNaN(n3)) {
+        divResultado.style.backgroundColor = '#fce7f3';
+        divResultado.style.color = '#9d174d';
+        divResultado.innerHTML = 'Preencha todas as notas!';
+        return;
+    }
 
-    <hr>
+    const media = (n1 + n2 + n3) / 3;
+    let situacao = '';
+    let corFundo = '';
+    let corTexto = '';
 
-    <h2>6. Alterando o texto com campo de entrada</h2>
-    <input type="text" id="campo-nome" placeholder="Digite seu nome">
-    <button onclick="mostrarNome()">Mostrar nome</button>
-    <h2 id="exibir-nome"></h2>
+    if (media >= 7.0) {
+        situacao = 'Aprovado';
+        corFundo = '#f3e8ff';
+        corTexto = '#6b21a8';
+    } else if (media >= 5.0) {
+        situacao = 'Em Recuperação';
+        corFundo = '#fef3c7';
+        corTexto = '#92400e';
+    } else {
+        situacao = 'Reprovado';
+        corFundo = '#ffe4e6';
+        corTexto = '#9f1239';
+    }
 
-    <hr>
-
-    <h2>7. Alterando uma imagem</h2>
-    <img id="minha-imagem" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/66/93/04/caption.jpg?w=800&h=800&s=1" alt="Imagem" width="200" height="150">
-    <button onclick="trocarImagem()">Trocar imagem</button>
-
-    <hr>
-
-    <h2>8. Aumentando o tamanho de um texto</h2>
-    <p id="texto-tamanho" style="font-size: 16px;">Este texto pode mudar de tamanho.</p>
-    <button onclick="aumentarTexto()">Aumentar texto</button>
-
-    <hr>
-
-    <h2>9. Criando elementos com JavaScript</h2>
-    <button onclick="adicionarItem()">Adicionar item</button>
-    <ul id="minha-lista"></ul>
-
-    <hr>
-
-    <h1 id="painel-titulo" style="font-size: 32px;">Painel de Controle</h1>
-    <p id="painel-texto">Este é o texto principal do painel de controle.</p>
-
-    <button onclick="mudarTituloPainel()">Mudar título</button>
-    <button onclick="mudarFundoPainel()">Mudar fundo</button>
-    <button onclick="mudarTextoPainel()">Mudar texto</button>
-    <button onclick="aumentarTituloPainel()">Aumentar título</button>
-    <button onclick="esconderTextoPainel()">Esconder texto</button>
-    <button onclick="mostrarTextoPainel()">Mostrar texto</button>
-
-    <script>
-        let numeroContador = 0;
-        function adicionarContador() {
-            numeroContador++;
-            document.getElementById('contador').innerText = numeroContador;
-        }
-
-        function mostrarNome() {
-            const nome = document.getElementById('campo-nome').value;
-            document.getElementById('exibir-nome').innerText = nome;
-        }
-
-        function trocarImagem() {
-            const img = document.getElementById('minha-imagem');
-            if (img.src.includes('caption.jpg')) {
-                img.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJiAVL_HuB_EinJLo8uqdcYgT374UHv9PcD0gwl3-JWg&s=10';
-            } else {
-                img.src = 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/66/93/04/caption.jpg?w=800&h=800&s=1';
-            }
-        }
-
-        let tamanhoFonteTexto = 16;
-        function aumentarTexto() {
-            tamanhoFonteTexto += 2;
-            document.getElementById('texto-tamanho').style.fontSize = tamanhoFonteTexto + 'px';
-        }
-
-        let numeroItem = 1;
-        function adicionarItem() {
-            const novoLi = document.createElement('li');
-            novoLi.innerText = 'Item ' + numeroItem;
-            document.getElementById('minha-lista').appendChild(novoLi);
-            numeroItem++;
-        }
-
-        function mudarTituloPainel() {
-            document.getElementById('painel-titulo').innerText = 'Título Alterado com Sucesso!';
-        }
-
-        function mudarFundoPainel() {
-            const cores = ['#2c3e50', '#8e44ad', '#16a085', '#d35400', '#27ae60'];
-            const corAleatoria = cores[Math.floor(Math.random() * cores.length)];
-            document.body.style.backgroundColor = corAleatoria;
-        }
-
-        function mudarTextoPainel() {
-            document.getElementById('painel-texto').style.color = '#f1c40f';
-        }
-
-        let tamanhoTitulo = 32;
-        function aumentarTituloPainel() {
-            tamanhoTitulo += 4;
-            document.getElementById('painel-titulo').style.fontSize = tamanhoTitulo + 'px';
-        }
-
-        function esconderTextoPainel() {
-            document.getElementById('painel-texto').style.display = 'none';
-        }
-
-        function mostrarTextoPainel() {
-            document.getElementById('painel-texto').style.display = 'block';
-        }
+    divResultado.style.backgroundColor = corFundo;
+    divResultado.style.color = corTexto;
+    divResultado.innerHTML = 'Média: ' + media.toFixed(2) + '<br>Situação: ' + situacao;
+}
     </script>
 
 </body>
