@@ -3,140 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercícios JavaScript</title>
-    <style> 
+    <title>Calculadora de Média</title>
+    <style>
         body {
-            background-color: rgb(41, 41, 71);
-            color: white;
-            
+    
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #f3e8ff, #d8b4fe);
+            margin: 0;
         }
-        button {
-            margin: 5px;
-            padding: 8px 12px;
-            cursor: pointer;
+        .card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.15);
+            width: 320px;
+            border: 1px solid #e9d5ff;
+        }
+        h2 {
+            margin-top: 0;
+            text-align: center;
+            color: #581c87;
+            font-size: 22px;
+        }
+        label {
+            font-weight: 600;
+            display: block;
+            margin-top: 12px;
+            color: #6b21a8;
+            font-size: 14px;
         }
         input {
-            padding: 8px;
-            margin-right: 5px;
-        }
-        hr {
-            margin: 30px 0;
-            border: 1px solid #555;
-        }
-        img {
-            display: block;
-            margin-bottom: 10px;
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            box-sizing: border-box;
+            border: 2px solid #e9d5ff;
             border-radius: 8px;
-            object-fit: cover;
+            outline: none;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+        input:focus {
+            border-color: #a855f7;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #7c3aed;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #6d28d9;
+        }
+        .resultado {
+            margin-top: 18px;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <h2>5. Contador de cliques</h2>
-    <h1 id="contador">0</h1>
-    <button onclick="adicionarContador()">Adicionar</button>
+    <div class="card">
+        <h2>Cálculo de Média</h2>
+        
+        <label for="nota1">1ª Nota:</label>
+        <input type="number" id="nota1" step="0.1" min="0" max="10" placeholder="Ex: 8.0">
 
-    <hr>
+        <label for="nota2">2ª Nota:</label>
+        <input type="number" id="nota2" step="0.1" min="0" max="10" placeholder="Ex: 6.5">
 
-    <h2>6. Alterando o texto com campo de entrada</h2>
-    <input type="text" id="campo-nome" placeholder="Digite seu nome">
-    <button onclick="mostrarNome()">Mostrar nome</button>
-    <h2 id="exibir-nome"></h2>
+        <label for="nota3">3ª Nota:</label>
+        <input type="number" id="nota3" step="0.1" min="0" max="10" placeholder="Ex: 7.0">
 
-    <hr>
+        <button onclick="calcular()">Calcular</button>
 
-    <h2>7. Alterando uma imagem</h2>
-    <img id="minha-imagem" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/66/93/04/caption.jpg?w=800&h=800&s=1" alt="Imagem" width="200" height="150">
-    <button onclick="trocarImagem()">Trocar imagem</button>
+        <div id="resultado" class="resultado"></div>
+    </div>
 
-    <hr>
-
-    <h2>8. Aumentando o tamanho de um texto</h2>
-    <p id="texto-tamanho" style="font-size: 16px;">Este texto pode mudar de tamanho.</p>
-    <button onclick="aumentarTexto()">Aumentar texto</button>
-
-    <hr>
-
-    <h2>9. Criando elementos com JavaScript</h2>
-    <button onclick="adicionarItem()">Adicionar item</button>
-    <ul id="minha-lista"></ul>
-
-    <hr>
-
-    <h1 id="painel-titulo" style="font-size: 32px;">Painel de Controle</h1>
-    <p id="painel-texto">Este é o texto principal do painel de controle.</p>
-
-    <button onclick="mudarTituloPainel()">Mudar título</button>
-    <button onclick="mudarFundoPainel()">Mudar fundo</button>
-    <button onclick="mudarTextoPainel()">Mudar texto</button>
-    <button onclick="aumentarTituloPainel()">Aumentar título</button>
-    <button onclick="esconderTextoPainel()">Esconder texto</button>
-    <button onclick="mostrarTextoPainel()">Mostrar texto</button>
-
-    <script>
-        let numeroContador = 0;
-        function adicionarContador() {
-            numeroContador++;
-            document.getElementById('contador').innerText = numeroContador;
-        }
-
-        function mostrarNome() {
-            const nome = document.getElementById('campo-nome').value;
-            document.getElementById('exibir-nome').innerText = nome;
-        }
-
-        function trocarImagem() {
-            const img = document.getElementById('minha-imagem');
-            if (img.src.includes('caption.jpg')) {
-                img.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJiAVL_HuB_EinJLo8uqdcYgT374UHv9PcD0gwl3-JWg&s=10';
-            } else {
-                img.src = 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/66/93/04/caption.jpg?w=800&h=800&s=1';
-            }
-        }
-
-        let tamanhoFonteTexto = 16;
-        function aumentarTexto() {
-            tamanhoFonteTexto += 2;
-            document.getElementById('texto-tamanho').style.fontSize = tamanhoFonteTexto + 'px';
-        }
-
-        let numeroItem = 1;
-        function adicionarItem() {
-            const novoLi = document.createElement('li');
-            novoLi.innerText = 'Item ' + numeroItem;
-            document.getElementById('minha-lista').appendChild(novoLi);
-            numeroItem++;
-        }
-
-        function mudarTituloPainel() {
-            document.getElementById('painel-titulo').innerText = 'Título Alterado com Sucesso!';
-        }
-
-        function mudarFundoPainel() {
-            const cores = ['#2c3e50', '#8e44ad', '#16a085', '#d35400', '#27ae60'];
-            const corAleatoria = cores[Math.floor(Math.random() * cores.length)];
-            document.body.style.backgroundColor = corAleatoria;
-        }
-
-        function mudarTextoPainel() {
-            document.getElementById('painel-texto').style.color = '#f1c40f';
-        }
-
-        let tamanhoTitulo = 32;
-        function aumentarTituloPainel() {
-            tamanhoTitulo += 4;
-            document.getElementById('painel-titulo').style.fontSize = tamanhoTitulo + 'px';
-        }
-
-        function esconderTextoPainel() {
-            document.getElementById('painel-texto').style.display = 'none';
-        }
-
-        function mostrarTextoPainel() {
-            document.getElementById('painel-texto').style.display = 'block';
-        }
-    </script>
-
+    <script src="iundex.js"></script>
 </body>
 </html>
