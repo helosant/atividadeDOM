@@ -1,6 +1,36 @@
+function calcular() {
+    const n1 = parseFloat(document.getElementById('nota1').value);
+    const n2 = parseFloat(document.getElementById('nota2').value);
+    const n3 = parseFloat(document.getElementById('nota3').value);
+    const divResultado = document.getElementById('resultado');
 
-function mudarTitulo() {
-    const titulo = document.getElementById('meu-titulo');
+    if (isNaN(n1) || isNaN(n2) || isNaN(n3)) {
+        divResultado.style.backgroundColor = '#fce7f3';
+        divResultado.style.color = '#9d174d';
+        divResultado.innerHTML = 'Preencha todas as notas!';
+        return;
+    }
 
-    titulo.textContent = 'Novo Titulo'
+    const media = (n1 + n2 + n3) / 3;
+    let situacao = '';
+    let corFundo = '';
+    let corTexto = '';
+
+    if (media >= 7.0) {
+        situacao = 'Aprovado';
+        corFundo = '#f3e8ff';
+        corTexto = '#6b21a8';
+    } else if (media >= 5.0) {
+        situacao = 'Em Recuperação';
+        corFundo = '#fef3c7';
+        corTexto = '#92400e';
+    } else {
+        situacao = 'Reprovado';
+        corFundo = '#ffe4e6';
+        corTexto = '#9f1239';
+    }
+
+    divResultado.style.backgroundColor = corFundo;
+    divResultado.style.color = corTexto;
+    divResultado.innerHTML = 'Média: ' + media.toFixed(2) + '<br>Situação: ' + situacao;
 }
